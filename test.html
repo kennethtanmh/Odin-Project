@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function multiply(number1, number2) {
+        return number1 * number2;
+      }
+      console.log(multiply(2, 2));
+
+      function caplitalised(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }
+      console.log(caplitalised("Bye Bye"));
+
+      let caplitalise = (word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      };
+      console.log(caplitalise("hello"));
+
+      let lastword = (word) => word.charAt(word.length - 1);
+      console.log(lastword("Yes I did it"));
+    </script>
+  </body>
+</html>
