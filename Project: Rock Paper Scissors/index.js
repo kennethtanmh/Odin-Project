@@ -1,9 +1,11 @@
 function getComputerChoice() {
   const choice = ["rock", "paper", "scissors"];
+  // For javascript Math.random will return a value between 0-1
   const randomChoice = Math.floor(Math.random() * 3);
   return choice[randomChoice];
 }
 
+//Change to lowercase as our choice is all in lower case
 function getPlayerChoice() {
   const playerChoice = prompt(
     "Please enter your choice: Rock, Paper, or Scissors"
@@ -11,6 +13,7 @@ function getPlayerChoice() {
   return playerChoice;
 }
 
+//Function to caplitalize the first character of a string
 let caplitalize = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 };
