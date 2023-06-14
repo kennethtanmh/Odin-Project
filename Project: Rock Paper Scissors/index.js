@@ -1,32 +1,17 @@
 function getComputerChoice() {
-  const choice = ["rock", "paper", "scissors"];
+  const choices = ["rock", "paper", "scissors"];
   // For javascript Math.random will return a value between 0-1
-  const randomChoice = Math.floor(Math.random() * 3);
-  return choice[randomChoice];
+  const randomIndex = Math.floor(Math.random() * choices.length);
+  return choices[randomIndex];
 }
 
-//Change to lowercase as our choice is all in lower case
-function getPlayerChoice() {
-  const playerChoice = prompt(
-    "Please enter your choice: Rock, Paper, or Scissors"
-  ).toLowerCase();
-  return playerChoice;
-}
-
-//Function to caplitalize the first character of a string
-let caplitalize = (word) => {
+// Function to capitalize the first letter of a string
+function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-};
+}
 
+// Function to play a round of the game
 function playRound(playerSelection, computerSelection) {
-  if (
-    playerSelection !== "rock" &&
-    playerSelection !== "paper" &&
-    playerSelection !== "scissors"
-  ) {
-    return "not a valid choice";
-  }
-
   if (
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock") ||
@@ -34,9 +19,9 @@ function playRound(playerSelection, computerSelection) {
   ) {
     return (
       "You Win! " +
-      caplitalize(playerSelection) +
+      capitalize(playerSelection) +
       " beats " +
-      caplitalize(computerSelection)
+      capitalize(computerSelection)
     );
   } else if (
     (playerSelection === "rock" && computerSelection === "paper") ||
@@ -45,47 +30,86 @@ function playRound(playerSelection, computerSelection) {
   ) {
     return (
       "You Lose! " +
-      caplitalize(computerSelection) +
+      capitalize(computerSelection) +
       " beats " +
-      caplitalize(playerSelection)
+      capitalize(playerSelection)
     );
   } else {
-    return "It's a tie! Both chose " + caplitalize(playerSelection);
+    return "It's a tie! Both chose " + capitalize(playerSelection);
   }
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
+// Initial score variables
+let playerScore = 0;
+let computerScore = 0;
 
-  for (let round = 1; round <= 5; round++) {
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
+// Function to handle player selection
+function handlePlayerSelection(playerSelection) {
+  const computerSelection = getComputerChoice();
+  const result = playRound(playerSelection, computerSelection);
 
-    console.log("Round " + round + ":");
-    console.log("Player chose " + caplitalize(playerSelection));
-    console.log("Computer chose " + caplitalize(computerSelection));
-    console.log(result);
+  displayResult(playerSelection, computerSelection, result);
 
-    if (result.startsWith("You Win!")) {
-      playerScore++;
-    } else if (result.startsWith("You Lose!")) {
-      computerScore++;
+  if (result.startsWith("You Win!")) {
+    playerScore++;
+  } else if (result.startsWith("You Lose!")) {
+    computerScore++;
+  }
+
+  displayScore();
+
+  if (playerScore === 5 || computerScore === 5) {
+    // Check if either player or computer has scored 5 points
+    if (playerScore === 5) {
+      announceWinner("Player");
+    } else {
+      announceWinner("Computer");
     }
-  }
 
-  console.log("Game Over");
-  console.log("Player Final Score " + playerScore);
-  console.log("Computer Final Score " + computerScore);
-
-  if (playerScore > computerScore) {
-    console.log("Yay! The player wins!");
-  } else if (computerScore > playerScore) {
-    console.log("Aw! The player lost!");
-  } else {
-    console.log("The game ended with a tie!");
+    // Disable the buttons to stop the game
+    document.getElementById("rock").disabled = true;
+    document.getElementById("paper").disabled = true;
+    document.getElementById("scissors").disabled = true;
   }
 }
 
-game();
+// Assign event listeners to the buttons
+let rock = document.getElementById("rock");
+rock.addEventListener("click", function () {
+  handlePlayerSelection("rock");
+});
+
+let paper = document.getElementById("paper");
+paper.addEventListener("click", function () {
+  handlePlayerSelection("paper");
+});
+
+let scissors = document.getElementById("scissors");
+scissors.addEventListener("click", function () {
+  handlePlayerSelection("scissors");
+});
+
+// Function to display the result in the HTML
+function displayResult(playerSelection, computerSelection, result) {
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML =
+    "Player chose " +
+    capitalize(playerSelection) +
+    ", Computer chose " +
+    capitalize(computerSelection) +
+    ". <br>" +
+    result;
+}
+
+// Function to display the scores in the DOM
+function displayScore() {
+  const scoreDiv = document.getElementById("score");
+  scoreDiv.textContent =
+    "Player: " + playerScore + " | Computer: " + computerScore;
+}
+
+// Function to announce the winner in the DOM
+function announceWinner(winner) {
+  const winnerDiv = document.getElementById("winner");
+  winnerDiv.textContent = winner + " wins the game!";
+}
