@@ -1,34 +1,25 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Rock Paper Scissors</title>
-  </head>
-  <body>
-    <div>
-      <button id="rock">Rock</button>
-      <button id="paper">Paper</button>
-      <button id="scissors">Scissors</button>
-    </div>
-    <script src="index.js"></script>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div>
-      <button id="rock">Rock</button>
-      <button id="paper">Paper</button>
-      <button id="scissors">Scissors</button>
+    <div class="container">
+      <h1 class="heading">Rock Paper Scissors</h1>
+      <p class="subheading">The first to win 5 games wins</p>
+      <div class="buttons">
+        <button id="rock">✊</button>
+        <button id="paper">🖐️</button>
+        <button id="scissors">✌️</button>
+      </div>
+      <div class="results">
+        <div id="result"></div>
+        <div id="score"></div>
+        <div id="winner"></div>
+      </div>
     </div>
-    <div id="result"></div>
-    <div id="score"></div>
-    <div id="winner"></div>
     <script src="index.js"></script>
   </body>
 </html>
