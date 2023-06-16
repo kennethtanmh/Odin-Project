@@ -60,15 +60,22 @@ const clearDisplay = () => {
 const calculate = () => {
   // treated as a literal hyphen and not interpreted as a range indicator.
   const regex = /([+\-*/])/;
+  // "5+7*2" split will ["5", "+", "7", "*", "2"].
   const values = displayValue.split(regex);
-  if (values.length !== 3) {
+
+  if (values.length < 3 || values.length % 2 != 1) {
     throw new Error("Invalid!");
   }
-  firstNumber = parseFloat(values[0]);
-  operator = values[1];
-  secondNumber = parseFloat(values[2]);
 
-  const result = operate(operator, firstNumber, secondNumber);
+  let result = parseFloat(values[0]);
+  // Since all odd number array are operators
+  // operator = values[i] and increment of 2 will ensure always is an operator
+  //operand = values[i + 1] will be the numbers
+  for (let i = 1; i < values.length; i += 2) {
+    const operator = values[i];
+    const operand = values[i + 1];
+    result = operate(operator, result, parseFloat(operand));
+  }
   //toString() returns the content of a string:
   displayValue = result.toString();
   displayElement.innerText = displayValue;
