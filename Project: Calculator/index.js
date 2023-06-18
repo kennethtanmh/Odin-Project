@@ -3,10 +3,6 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-let firstNumber = 3;
-let operator = "+";
-let secondNumber = 5;
-
 const operate = (operator, a, b) => {
   switch (operator) {
     case "+":
@@ -49,6 +45,7 @@ const updateDisplay = (value) => {
   } else {
     displayValue += value;
   }
+
   displayElement.innerText = displayValue;
 };
 
@@ -57,26 +54,56 @@ const clearDisplay = () => {
   displayElement.innerText = displayValue;
 };
 
-const calculate = () => {
-  // treated as a literal hyphen and not interpreted as a range indicator.
-  const regex = /([+\-*/])/;
-  // "5+7*2" split will ["5", "+", "7", "*", "2"].
-  const values = displayValue.split(regex);
+const evaluateParentheses = (expression) => {
+  const regex = /\(([^\(\)]+)\)/; // Regular expression to match parentheses
+  let result = expression;
 
-  if (values.length < 3 || values.length % 2 != 1) {
-    throw new Error("Invalid!");
+  while (regex.test(result)) {
+    result = result.replace(regex, (match, subExpression) => {
+      const evaluated = calculate(subExpression);
+      return evaluated;
+    });
+  }
+
+  return result;
+};
+
+const calculate = () => {
+  const parenthesesEvaluated = evaluateParentheses(displayValue);
+  const regex = /([+\-*/])/;
+  const values = parenthesesEvaluated.split(regex);
+
+  if (values.length < 3 || values.length % 2 !== 1) {
+    throw new Error("Invalid expression!");
   }
 
   let result = parseFloat(values[0]);
-  // Since all odd number array are operators
-  // operator = values[i] and increment of 2 will ensure always is an operator
-  //operand = values[i + 1] will be the numbers
+
   for (let i = 1; i < values.length; i += 2) {
     const operator = values[i];
     const operand = values[i + 1];
-    result = operate(operator, result, parseFloat(operand));
+    if (operator === "*" || operator === "/") {
+      // Perform multiplication or division immediately
+      result = operate(operator, result, parseFloat(operand));
+    } else {
+      // Store the operator and operand for later evaluation
+      const nextOperator = values[i + 2];
+      const nextOperand = values[i + 3];
+      if (nextOperator === "*" || nextOperator === "/") {
+        // Perform multiplication or division next
+        result = operate(
+          operator,
+          result,
+          operate(nextOperator, parseFloat(operand), parseFloat(nextOperand))
+        );
+        i += 2; // Skip the next operator and operand
+      } else {
+        // Perform addition or subtraction
+        result = operate(operator, result, parseFloat(operand));
+      }
+    }
   }
-  //toString() returns the content of a string:
+
   displayValue = result.toString();
   displayElement.innerText = displayValue;
 };
