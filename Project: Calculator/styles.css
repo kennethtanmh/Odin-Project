@@ -1,15 +1,31 @@
+body {
+  /* background-color: #028091; */
+  background-color: #a6b697;
+}
+
+.calculator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .calculator {
-  width: 200px;
-  border: 1px solid #ccc;
+  width: 300px;
+  height: 400px;
+  border: 1px solid ccc;
   padding: 10px;
-  background-color: lightcyan;
+  background-color: #e1cab2;
 }
 
 .display {
-  margin-bottom: 10px;
+  height: 35px;
+  margin-bottom: 20px;
   padding: 5px;
-  border: 1px solid #ccc;
-  background-color: #f2f2f2;
+  border: 5px solid #ccc;
+  background-color: #bb946c;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 32px;
 }
 
 .buttons {
@@ -19,9 +35,28 @@
 }
 
 .button {
+  padding: 23px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #bb946c;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+
+.footer {
+  margin-top: 2px;
   padding: 10px;
   text-align: center;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #000000;
+}
+
+.footer a {
+  text-decoration: none;
+  color: inherit; /* Inherit color from the parent element */
 }
