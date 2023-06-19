@@ -1,3 +1,9 @@
+const displayElement = document.getElementById("display");
+const buttons = document.querySelectorAll(".button");
+const clearButton = document.querySelector(".clear-button");
+const equalButton = document.querySelector(".equal-button");
+
+let displayValue = "0";
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
@@ -17,12 +23,6 @@ const operate = (operator, a, b) => {
       throw new Error("Invalid");
   }
 };
-
-let displayValue = "0";
-const displayElement = document.getElementById("display");
-const buttons = document.querySelectorAll(".button");
-const clearButton = document.querySelector(".clear-button");
-const equalButton = document.querySelector(".equal-button");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -55,10 +55,15 @@ const clearDisplay = () => {
 };
 
 const evaluateParentheses = (expression) => {
-  const regex = /\(([^\(\)]+)\)/; // Regular expression to match parentheses
+  // Regular expression to match parentheses
+  const regex = /\(([^\(\)]+)\)/;
   let result = expression;
-
+  // The test() method tests for a match in a string
+  // This loop is necessary because there may be multiple sets of parentheses in the expression.
   while (regex.test(result)) {
+    // The match parameter represents the entire matched substring, including the
+    // parentheses. The subExpression parameter represents the sub-expression within the
+    // parentheses (i.e., the part to be evaluated).
     result = result.replace(regex, (match, subExpression) => {
       const evaluated = calculate(subExpression);
       return evaluated;
@@ -70,6 +75,7 @@ const evaluateParentheses = (expression) => {
 
 const calculate = () => {
   const parenthesesEvaluated = evaluateParentheses(displayValue);
+  // Regular expression to operators
   const regex = /([+\-*/])/;
   const values = parenthesesEvaluated.split(regex);
 
