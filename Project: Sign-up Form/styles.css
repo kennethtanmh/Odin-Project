@@ -112,8 +112,8 @@ input {
 
 .button button {
   padding: 10px 20px;
-  background-color: #4caf50;
-  color: #ffffff;
+  background-color: #333333;
+  color: white;
   border: none;
   cursor: pointer;
 }
