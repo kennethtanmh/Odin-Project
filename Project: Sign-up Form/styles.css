@@ -1,0 +1,44 @@
+body {
+  display: flex;
+  margin: 0px;
+  background-color: #f9fafb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.corgi {
+  position: relative;
+  width: 35vw;
+  height: 100vh;
+}
+
+.corgi > img {
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: var(--text-color);
+  top: 23%;
+  left: 56%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: white;
+}
+
+.title > p {
+  font-size: 100px;
+  font-weight: 600;
+}
+
+.credits {
+  position: fixed;
+  bottom: 10px;
+  left: 12%;
+  font-size: small;
+  color: var(--text-color);
+  z-index: 2;
+}
