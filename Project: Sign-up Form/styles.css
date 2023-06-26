@@ -123,3 +123,12 @@ input {
   font-weight: bold;
   color: #333333;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 63vw;
+  font-size: medium;
+  font-weight: bold;
+  color: #333333;
+}
