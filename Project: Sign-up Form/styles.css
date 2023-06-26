@@ -40,24 +40,30 @@ body {
 }
 
 .page {
-  background-color: beige;
+  background-color: #e7cfc8;
 }
+
 .page-title {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  color: rgb(186, 182, 182);
-  height: 200px; /* Set desired height for the heading */
-  margin: 0 auto; /* Center the container horizontally */
-  width: 65vw; /* Set the width of the container */
+  color: #333333;
+  height: 200px;
+  margin: 0 auto;
+  width: 65vw;
 }
 
 .page-title > h1 {
   font-size: 40px;
   font-weight: 600;
-  text-align: center; /* Center the text horizontally */
-  width: 100%; /* Ensure the text takes up the full width */
+  text-align: center;
+  width: 100%;
+}
+
+.form-container {
+  width: 65vw;
+  display: flex;
+  justify-content: center;
 }
 
 form {
@@ -76,8 +82,7 @@ fieldset {
 
 .row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .input-group {
@@ -86,12 +91,35 @@ fieldset {
 }
 
 label {
+  font-size: x-large;
   font-weight: bold;
+  color: #333333;
+}
+
+.input-group:first-child {
+  margin-right: 100px;
+}
+
+.input-group:last-child {
+  margin-left: 100px;
 }
 
 input {
-  width: 100%;
-  max-width: 300px;
-  padding: 5px;
+  width: 120%;
+  padding: 10px;
   margin-top: 5px;
+}
+
+.button button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.log-in {
+  font-size: x-large;
+  font-weight: bold;
+  color: #333333;
 }
